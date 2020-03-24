@@ -8,14 +8,15 @@ popd
 ## Generate global JSON-LD model
 pushd ./scripts
 npm i
-npm link ../../aml2doc
 npm run global_model
 popd
 
 ## HTML documentation
 rm -rf html/*
 mkdir -p html
-node ./scripts/node_modules/@aml-org/aml2html ./html -d ./src -g ./scripts/cfg.js -t ./scripts/templates
+pushd ./scripts/node_modules/@aml-org/aml2html
+npm run aml2html -- ../../../../html -d ../../../../src -g ../../../cfg.js -t ../../../templates
+popd
 cp -rf ./scripts/templates/*  ./html/
 rm -rf ./html/*.mustache
 
