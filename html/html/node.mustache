@@ -78,94 +78,53 @@
     </div>
   </div>
 </header>
-    <div class="container root-div-container" id="customer-root-div-container">
+    <div class="container root-div-container" id="{{slug}}-root-div-container">
       <div class="row">
         <div class="col-12 col-lg-3">
           <div class="aside" id="aside">
             <div class="col-12">
               <div class="dialects-nav">
-                <h4>Entity Groups</h4>
+                <h4>{{dialectsHeader}}</h4>
                 <ul>
-                    <li class="dialects-nav-item inactive-nav-item">
-                      <a href="accountentitygroup.html" title=" Account"> Account</a>
+                  {{#navData.dialects}}
+                    <li class="dialects-nav-item {{^active}}in{{/active}}active-nav-item">
+                      <a href="{{{pageName}}}.html" title="{{label}}">{{label}}</a>
                     </li>
-                    <li class="dialects-nav-item inactive-nav-item">
-                      <a href="contactpointentitygroup.html" title=" Contact Point"> Contact Point</a>
-                    </li>
-                    <li class="dialects-nav-item inactive-nav-item">
-                      <a href="leadentitygroup.html" title=" Lead"> Lead</a>
-                    </li>
-                    <li class="dialects-nav-item inactive-nav-item">
-                      <a href="partyentitygroup.html" title=" Party"> Party</a>
-                    </li>
-                    <li class="dialects-nav-item active-nav-item">
-                      <a href="partyroleentitygroup.html" title=" Party Role"> Party Role</a>
-                    </li>
-                    <li class="dialects-nav-item inactive-nav-item">
-                      <a href="paymententitygroup.html" title=" Payment"> Payment</a>
-                    </li>
-                    <li class="dialects-nav-item inactive-nav-item">
-                      <a href="paymentmethodentitygroup.html" title=" Payment Method"> Payment Method</a>
-                    </li>
-                    <li class="dialects-nav-item inactive-nav-item">
-                      <a href="productattributeentitygroup.html" title=" Product Attribute"> Product Attribute</a>
-                    </li>
-                    <li class="dialects-nav-item inactive-nav-item">
-                      <a href="productcatalogentitygroup.html" title=" Product Catalog"> Product Catalog</a>
-                    </li>
-                    <li class="dialects-nav-item inactive-nav-item">
-                      <a href="productentitygroup.html" title=" Product"> Product</a>
-                    </li>
-                    <li class="dialects-nav-item inactive-nav-item">
-                      <a href="salesorderentitygroup.html" title=" Sales Order"> Sales Order</a>
-                    </li>
-                    <li class="dialects-nav-item inactive-nav-item">
-                      <a href="shipmententitygroup.html" title=" Shipment"> Shipment</a>
-                    </li>
+                  {{/navData.dialects}}
                 </ul>
               </div>
               <div class="schemas-nav">
-                <h4>Entities</h4>
+                <h4>{{schemasHeader}}</h4>
                 <ul>
-                    <li class="schemas-nav-item inactive-nav-item">
-                      <a href="schema_partyroleentitygroup_competitor.html" title=" Competitor"> Competitor</a>
+                  {{#navData.nodeMappings}}
+                    <li class="schemas-nav-item {{^active}}in{{/active}}active-nav-item">
+                      <a href="{{{pageName}}}.html" title="{{label}}">{{label}}</a>
                     </li>
-                    <li class="schemas-nav-item active-nav-item">
-                      <a href="schema_partyroleentitygroup_customer.html" title=" Customer"> Customer</a>
-                    </li>
-                    <li class="schemas-nav-item inactive-nav-item">
-                      <a href="schema_partyroleentitygroup_customerstatushistory.html" title=" Customer Status History"> Customer Status History</a>
-                    </li>
-                    <li class="schemas-nav-item inactive-nav-item">
-                      <a href="schema_partyroleentitygroup_partyrole.html" title=" Party Role"> Party Role</a>
-                    </li>
-                    <li class="schemas-nav-item inactive-nav-item">
-                      <a href="schema_partyroleentitygroup_seller.html" title=" Seller"> Seller</a>
-                    </li>
-                    <li class="schemas-nav-item inactive-nav-item">
-                      <a href="schema_partyroleentitygroup_supplier.html" title=" Supplier"> Supplier</a>
-                    </li>
+                  {{/navData.nodeMappings}}
                 </ul>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-12 col-lg-9 content-block" id="customer-content-block">
+        <div class="col-12 col-lg-9 content-block" id="{{slug}}-content-block">
           <div class="layout">
             <button class="btn" id="aside-menu" onclick="menuToggle(this)">Menu ></button>
             <h2 class="schema-name-header">
-              <span class="dialect-name"> Party Role</span> ::
-              <span class="schema-name"> Customer</span>
+              <span class="dialect-name">{{dialectLabel}}</span> ::
+              <span class="schema-name">{{label}}</span>
             </h2>
 
             <p class="schema-term-id root-list-item">
-              <span>Term URI: </span><span>http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;Customer</span>
+              <span>Term URI: </span><span>{{targetClassId}}</span>
             </p>
 
+            {{#description}}
               <p class="schema-description root-list-item">
-                <span>Description: </span><span>Information about a party playing role of customer e.g. life time value, life cycle status</span>
+                <span>Description: </span><span>{{description}}</span>
               </p>
+            {{/description}}
 
+            {{#linkedSchemas.length}}
                 <h3>Related entities</h3>
                 <div class="table-responsive">
                     <table id="related-entities-schemas-table">
@@ -176,19 +135,29 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr id="Party-schemas-tr">
-                                  <td class="name-td"> Party</td>
-                                  <td class="description-td">A unified, in system, definition of who you are dealing with e.g. John Doe, Northern Trail Outfitters and can be of different types e.g. individual, business, affiliation group.</td>
+                        {{#linkedSchemas}}
+                            <tr id="{{rangeName}}-schemas-tr">
+                                {{#rangePageName}}
+                                    <td class="name-td"><a href="{{{rangePageName}}}.html">{{rangeLabel}}</a></td>
+                                    <td class="description-td">{{rangeDescription}}</td>
+                                {{/rangePageName}}
+                                {{^rangePageName}}
+                                  <td class="name-td">{{rangeLabel}}</td>
+                                  <td class="description-td">{{rangeDescription}}</td>
+                                {{/rangePageName}}
 
                             </tr>
+                        {{/linkedSchemas}}
                         </tbody>
                     </table>
                 </div>
+            {{/linkedSchemas.length}}
 
-            
+            {{^scalarProperties}}<p>No Scalar Properties</p>{{/scalarProperties}}
+            {{#scalarProperties.length}}
               <div class="table-responsive">
                 <h3>Scalar Properties</h3>
-                <table id="customer-sprops-table">
+                <table id="{{slug}}-sprops-table">
                   <thead>
                   <tr>
                     <th>Name</th>
@@ -196,176 +165,33 @@
                   </tr>
                   </thead>
                   <tbody>
-                    <tr id="churnScore-scalar-tr">
-                      <td>churnScore</td>
+                  {{#scalarProperties}}
+                    <tr id="{{name}}-scalar-tr">
+                      <td>{{name}}</td>
                       <td>
                         <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;churnScore</li>
-                          <li class="sprop-range">Range: integer</li>
-                            <li class="sprop-description">Description: How big is the chance this customer will defect from being our customer</li>
+                          <li class="sprop-term-id">Term URI: {{id}}</li>
+                          <li class="sprop-range">Range: {{range}}</li>
+                          {{#propDesc}}
+                            <li class="sprop-description">Description: {{propDesc}}</li>
+                          {{/propDesc}}
+                          {{#constraints}}
+                            <li class="sprop-constraint">{{name}}: {{value}}</li>
+                          {{/constraints}}
                         </ul>
                       </td>
                     </tr>
-                    <tr id="customerNumber-scalar-tr">
-                      <td>customerNumber</td>
-                      <td>
-                        <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;customerNumber</li>
-                          <li class="sprop-range">Range: string</li>
-                            <li class="sprop-description">Description: Number used to identify this customer</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr id="customerSatisfactionScore-scalar-tr">
-                      <td>customerSatisfactionScore</td>
-                      <td>
-                        <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;customerSatisfactionScore</li>
-                          <li class="sprop-range">Range: integer</li>
-                            <li class="sprop-description">Description: How happy our customers are with the seller</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr id="customerStatus-scalar-tr">
-                      <td>customerStatus</td>
-                      <td>
-                        <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;customerStatus</li>
-                          <li class="sprop-range">Range: string</li>
-                            <li class="sprop-description">Description: What status customer is in e.g. prospect, active, inactive, nonrecoverable, hold, expired</li>
-                            <li class="sprop-constraint">mandatory: true</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr id="id-scalar-tr">
-                      <td>id</td>
-                      <td>
-                        <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;id</li>
-                          <li class="sprop-range">Range: guid</li>
-                            <li class="sprop-description">Description: Primary Key</li>
-                            <li class="sprop-constraint">mandatory: true</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr id="last12MonthsNewRevenueAmount-scalar-tr">
-                      <td>last12MonthsNewRevenueAmount</td>
-                      <td>
-                        <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;last12MonthsNewRevenueAmount</li>
-                          <li class="sprop-range">Range: integer</li>
-                            <li class="sprop-description">Description: How much new revenue customer contributed with in last 12 months</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr id="last12MonthsSupportCallCount-scalar-tr">
-                      <td>last12MonthsSupportCallCount</td>
-                      <td>
-                        <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;last12MonthsSupportCallCount</li>
-                          <li class="sprop-range">Range: integer</li>
-                            <li class="sprop-description">Description: How many support calls been made between customer and us in last 12 months</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr id="last24MonthsNewRevenueAmount-scalar-tr">
-                      <td>last24MonthsNewRevenueAmount</td>
-                      <td>
-                        <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;last24MonthsNewRevenueAmount</li>
-                          <li class="sprop-range">Range: integer</li>
-                            <li class="sprop-description">Description: How much new revenue customer contributed with in last 24 months</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr id="marketingEmailResponseRate-scalar-tr">
-                      <td>marketingEmailResponseRate</td>
-                      <td>
-                        <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;marketingEmailResponseRate</li>
-                          <li class="sprop-range">Range: integer</li>
-                            <li class="sprop-description">Description: How many percent of emails sent are replied to by customer</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr id="netPromoterScore-scalar-tr">
-                      <td>netPromoterScore</td>
-                      <td>
-                        <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;netPromoterScore</li>
-                          <li class="sprop-range">Range: integer</li>
-                            <li class="sprop-description">Description: Level of willingness by customer to promote our product and is between -100 to 100</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr id="originatingCustomerSource-scalar-tr">
-                      <td>originatingCustomerSource</td>
-                      <td>
-                        <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;originatingCustomerSource</li>
-                          <li class="sprop-range">Range: string</li>
-                            <li class="sprop-description">Description: The source channel type of the customer. For example, Ad or Trade Show</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr id="prospectRating-scalar-tr">
-                      <td>prospectRating</td>
-                      <td>
-                        <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;prospectRating</li>
-                          <li class="sprop-range">Range: string</li>
-                            <li class="sprop-description">Description: The customers prospect rating, for example Hot, Warm, or Cold.</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr id="totalBookingsAmount-scalar-tr">
-                      <td>totalBookingsAmount</td>
-                      <td>
-                        <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;totalBookingsAmount</li>
-                          <li class="sprop-range">Range: integer</li>
-                            <li class="sprop-description">Description: Total revenue booked for this customer</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr id="totalContractedAmount-scalar-tr">
-                      <td>totalContractedAmount</td>
-                      <td>
-                        <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;totalContractedAmount</li>
-                          <li class="sprop-range">Range: integer</li>
-                            <li class="sprop-description">Description: How much future revenue this customer may contribute with and that is not yet booked</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr id="totalLifeTimeValue-scalar-tr">
-                      <td>totalLifeTimeValue</td>
-                      <td>
-                        <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;totalLifeTimeValue</li>
-                          <li class="sprop-range">Range: integer</li>
-                            <li class="sprop-description">Description: How much has customer bought from us since beginning of time</li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr id="totalProfitContributionAmount-scalar-tr">
-                      <td>totalProfitContributionAmount</td>
-                      <td>
-                        <ul>
-                          <li class="sprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;totalProfitContributionAmount</li>
-                          <li class="sprop-range">Range: integer</li>
-                            <li class="sprop-description">Description: How much money customer contributed to our profit</li>
-                        </ul>
-                      </td>
-                    </tr>
+                  {{/scalarProperties}}
                   </tbody>
                 </table>
               </div>
+            {{/scalarProperties.length}}
 
-            
+            {{^linkProperties}}<p>No Link Properties</p>{{/linkProperties}}
+            {{#linkProperties.length}}
               <div class="table-responsive">
                 <h3>Link Properties</h3>
-                <table id="customer-lprops-table">
+                <table id="{{slug}}-lprops-table">
                   <thead>
                   <tr>
                     <th>Name</th>
@@ -373,28 +199,41 @@
                   </tr>
                   </thead>
                   <tbody>
-                    <tr id="party-link-tr">
-                      <td>party</td>
+                  {{#linkProperties}}
+                    <tr id="{{name}}-link-tr">
+                      <td>{{name}}</td>
                       <td>
                         <ul>
-                          <li class="lprop-term-id">Term URI: http:&#x2F;&#x2F;cloudinformationmodel.org&#x2F;model&#x2F;party</li>
+                          <li class="lprop-term-id">Term URI: {{id}}</li>
                           <li class="lprop-range">
                             <span class="lprop-range-list-title">Range:</span>
                             <ul class="lprop-range-list">
+                              {{#range}}
                                 <li class="lprop-range-list-item">
-                                    Party
+                                  {{#rangePageName}}
+                                    <a href="{{{rangePageName}}}.html" title="{{rangeName}}">{{rangeLabel}}</a>
+                                  {{/rangePageName}}
+                                  {{^rangePageName}}
+                                    {{rangeName}}
+                                  {{/rangePageName}}
                                 </li>
+                              {{/range}}
                             </ul>
                           </li>
-                            <li class="lprop-description">Description: Reference to the parent Party e.g. Individual, Business, Affiliation Group</li>
-                            <li class="lprop-constraint">mandatory: true</li>
-                            <li class="lprop-constraint">allowMultiple: true</li>
+                          {{#propDesc}}
+                            <li class="lprop-description">Description: {{propDesc}}</li>
+                          {{/propDesc}}
+                          {{#constraints}}
+                            <li class="lprop-constraint">{{name}}: {{value}}</li>
+                          {{/constraints}}
                         </ul>
                       </td>
                     </tr>
+                  {{/linkProperties}}
                   </tbody>
                 </table>
               </div>
+            {{/linkProperties.length}}
           </div>
         </div>
       </div>
